@@ -22,7 +22,7 @@ module.exports = function (app) {
         });
     });
 
-    app.category("/api/decks", function (req, res) {
+    app.post("/api/decks", function (req, res) {
         db.Deck.create(req.body).then(function (dbDeck) {
             res.json(dbDeck);
         });
