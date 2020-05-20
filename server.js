@@ -7,6 +7,8 @@
 var express = require("express");
 
 var app = express();
+// Requiring passport
+var passport = require("./config/passport");
 var PORT = process.env.PORT || 8080;
 
 var db = require("./models");
