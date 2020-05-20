@@ -15,11 +15,13 @@ module.exports = function (sequelize, DataTypes) {
             }
         }
     });
-    Deck.associate = function (models) {
-        models.Deck.hasMany(models.card, { onDelete: 'cascade' });
-    };
+
     Deck.associate = function (models) {
         models.Deck.belongsTo(models.user);
+        models.Deck.hasMany(models.userdecks, {
+            onDelete: "cascade"
+        })
+        models.Deck.hasMany(models.card, { onDelete: 'cascade' });
     }
 
     return Deck;
