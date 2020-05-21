@@ -7,14 +7,14 @@ module.exports = function (sequelize, DataTypes) {
       unique: true,
       validate: {
         isUsername: true
-      }
-    },
+      },
     // The password cannot be null
     password: {
       type: DataTypes.STRING,
       allowNull: false
+       }
     }
-  });
+  })
 
   User.associate = function (models) {
     models.User.hasMany(models.Deck, { onDelete: 'cascade' });
@@ -22,4 +22,9 @@ module.exports = function (sequelize, DataTypes) {
   User.associate = function (models) {
     models.User.hasMany(models.userdecks, { onDelete: 'cascade' });
   };
-}
+
+
+};
+
+
+
