@@ -7,11 +7,10 @@
 var express = require("express");
 var session = require("express-session");
 var bodyParser = require("body-parser");
-//For BodyParser
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+
 // Requiring passport
 var passport = require("./config/passport");
+// this is the port we are setting up
 var PORT = process.env.PORT || 8080;
 var db = require("./models");
 
