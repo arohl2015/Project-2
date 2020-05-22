@@ -110,6 +110,10 @@ module.exports = function (app) {
                 id: req.params.id
             }
 
+    app.post("/api/decks", function (req, res) {
+        db.Deck.create(req.body).then(function (dbDeck) {
+            res.json(dbDeck);
+        });
         }).then(function () {
             res.json("Update")
         })
