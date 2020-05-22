@@ -30,7 +30,7 @@ module.exports = function (app) {
             where: {
                 DeckID: req.params.DeckId
             },
-          
+
         }).then(function (cards) {
             res.json(cards);
         })
@@ -72,24 +72,28 @@ module.exports = function (app) {
         })
     })
     //Add new cards
-    app.post("/api/new/card"), function (req, res) {
+    app.post("/api/new/card", function (req, res) {
         console.log("req.body", req.body)
         db.Card.create({
+
             front: req.body.front,
             back: req.body.back,
-            DeckId: result.id
+            DeckId: req.body.DeckId
+
         }).then(function (result) {
             res.json(result);
         })
     }
+    )
     // Update deck with corresponding ID (editting specific deck)
     app.put("/api/decks/update/:id", function (req, res) {
         db.Deck.update({
             title: req.body.title,
-            body: req.body.body
+            body: req.body.body,
+
         }, {
             where: {
-                id: req.params.id
+                id: req.body.id
             }
 
         }).then(function () {
