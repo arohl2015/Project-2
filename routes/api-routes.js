@@ -18,16 +18,19 @@ module.exports = function (app) {
             where: {
                 id: req.params.id
             }
-        }).then(function (dbDeck) {
-            res.json(dbDeck);
         })
+
+            .then(function (dbDeck) {
+                res.json(dbDeck);
+            })
     })
     //Get the cards associated with deck ID (when clicking into deck)
-    app.get("/api/cards/:deckID", function (req, res) {
-        db.Cards.findAll({
+    app.get("/api/cards/:DeckId", function (req, res) {
+        db.Card.findAll({
             where: {
-                deckID: req.params.deckId
-            }
+                DeckID: req.params.DeckId
+            },
+          
         }).then(function (cards) {
             res.json(cards);
         })
@@ -47,21 +50,34 @@ module.exports = function (app) {
         })
     })
     //Add new deck 
-    app.post("/api/new/deck"), function (req, res) {
-        db.Deck.create({
-            id: req.body.id,
-            title: req.body.title,
-            body: req.body.body
-        }).then(function (result) {
-            res.json(result);
+    app.post("/api/new/deck", function (req, res) {
+        console.log("req.body", req.body)
+        db.Deck.create(
+            {
+                title: req.body.title,
+                body: req.body.body,
+                id: req.body.id
+            }
+        ).then(function (result) {
+            console.log(result.id);
+            db.Card.create({
+                front: req.body.front,
+                back: req.body.back,
+                DeckId: result.id
+            }).then(function (result) {
+                res.json(result);
+            })
+
+
         })
-    }
+    })
     //Add new cards
     app.post("/api/new/card"), function (req, res) {
-        db.Deck.create({
-            id: req.body.id,
+        console.log("req.body", req.body)
+        db.Card.create({
             front: req.body.front,
-            back: req.body.back
+            back: req.body.back,
+            DeckId: result.id
         }).then(function (result) {
             res.json(result);
         })

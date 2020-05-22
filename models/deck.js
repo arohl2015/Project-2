@@ -17,11 +17,11 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     Deck.associate = function (models) {
-        models.Deck.belongsTo(models.user);
-        models.Deck.hasMany(models.userdecks, {
+        Deck.belongsTo(models.User);
+        Deck.hasMany(models.UserDecks, {
             onDelete: "cascade"
         })
-        models.Deck.hasMany(models.card, { onDelete: 'cascade' });
+        models.Deck.hasMany(models.Card, { onDelete: 'cascade' });
     }
 
     return Deck;

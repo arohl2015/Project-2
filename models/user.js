@@ -17,9 +17,13 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   User.associate = function (models) {
-    models.User.hasMany(models.Deck, { onDelete: 'cascade' });
+    User.hasMany(models.Deck, { onDelete: 'cascade' });
   };
   User.associate = function (models) {
-    models.User.hasMany(models.userdecks, { onDelete: 'cascade' });
+    User.hasMany(models.UserDecks, { onDelete: 'cascade' });
   };
+
+  return User;
 }
+
+

@@ -5,9 +5,9 @@ module.exports = function (sequelize, DataTypes) {
 
     UserDecks.associate = function(models){
         // Each UserEvent belongs to one User
-        models.UserDecks.belongsTo(models.user, { onDelete: "cascade" });
+        UserDecks.belongsTo(models.User, { onDelete: "cascade" });
         // and One Event
-        models.UserDecks.belongsTo(models.deck, { onDelete: "cascade" });
+        UserDecks.belongsTo(models.Deck, { onDelete: "cascade" });
       }
     
       return UserDecks;
