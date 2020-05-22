@@ -93,7 +93,7 @@ module.exports = function (app) {
 
         }, {
             where: {
-                id: req.body.id
+                id: req.params.id
             }
 
         }).then(function () {
