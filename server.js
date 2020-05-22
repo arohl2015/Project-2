@@ -15,6 +15,9 @@ var PORT = process.env.PORT || 8080;
 var db = require("./models");
 
 var app = express();
+//For BodyParser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
