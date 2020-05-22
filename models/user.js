@@ -1,12 +1,15 @@
+// we import bcrypt which we need to secure passwords.
+var bcrypt = require("bcryptjs");
+
 module.exports = function (sequelize, DataTypes) {
   var User = sequelize.define("User", {
     // The username cannot be null
-    username: {
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate: {
-        isUsername: true
+        isEmail: true
       },
     // The password cannot be null
     password: {

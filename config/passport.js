@@ -3,9 +3,10 @@
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 
-var db = require();
+var db = require("../models");
 
 passport.use(new LocalStrategy(
+  //after speaking with the team, decided to use email over a username
   function(email, password, done) {
     User.findOne({ email: email }, function(err, user) {
       if (err) { return done(err); }
