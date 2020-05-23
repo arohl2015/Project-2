@@ -17,7 +17,7 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     Card.associate = function (models) {
-        models.Card.belongsTo(models.Deck);
+        Card.belongsTo(models.Deck);
     }
 
     return Card;
