@@ -14,10 +14,12 @@ passport.use(new LocalStrategy(
   function (email, password, done) {
     // When a user tries to sign in this code runs
     db.User.findOne({
+      attributes: ['email', 'password'],
       where: {
         email: email,
 
-      }
+      },
+      logging: console.log
     }).then(function (dbUser) {
       // If there's no user with the given email
       if (!dbUser) {
@@ -26,7 +28,8 @@ passport.use(new LocalStrategy(
         });
       }
       // If there is a user with the given email, but the password the user gives us is incorrect
-      else if (!dbUser.validPassword(password, dbUser.password)) {
+      else if (!dbUser.validPassword(password, dbUser.dataValues.password)) {
+        console.log(dbUser.validPassword(password, dbUser.dataValues.password));
         return done(null, false, {
           message: "Incorrect password."
         });
