@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <link rel="stylesheet" href="./css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>_Assimilate</title>
+</head>
+
+<body>
+    <nav>
+
+        <div class="nav-wrapper blue accent-3">
+            <a href="#!" class="brand-logo left"> _Assimilate </a>
+            <a href="#" data-target="slide-out" class="sidenav-trigger white-text"> <i
+                    class="material-icons"></i>menu</i>
+
+
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="./deck.html">Home</a></li>
+                    <li><a href="./account.html">Account
+                        </a></li>
+
+                </ul>
+        </div>
+
+    </nav>
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="user-view">
+                <a href="#user"><img class="circle" src=""></a>
+                <a href="#name"><span class="teal-text name">Sean John</span></a>
+                <a href="#email"><span class="teal-text email">seanjohn@seanJohn.com</span></a>
+            </div>
+        </li>
+        <li><a href="#!"><i class="material-icons">cloud</i>Saved Decks</a></li>
+        <li><a href="#!"> <i class="material-icons">search</i>Search Decks</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a class="subheader">Subheader</a></li>
+        <li><a class="waves-effect" href="#!">About Assimilate</a></li>
+
+    </ul>
+
+    </nav>
+    <div class="row">
+        <div class="col s3">
+            <i class="medium material-icons"><a href="./newdeck.html">add_circle</a></i>
+        </div>
+
+        <div class="col s6 center">
+            <h3 style="font-family: 'Cedarville Cursive', cursive">My Decks</h3>
+        </div>
+
+    </div>
+
+    <section class="slider">
+        <div class="carousel">
+
+            <a class="carousel-item" href=""><img
+                    src="https://www.bitdegree.org/tutorials/wp-content/uploads/2018/10/Top-10-Tips-To-Learn-JavaScript.jpg"></a>
+            <a class="carousel-item" href="#three!"><img
+                    src="https://www.webdesignerdepot.com/cdn-origin/uploads/2019/07/featured_jquery.jpg"></a>
+            <a class="carousel-item" href="#four!"><img
+                    src="https://hackernoon.com/hn-images/1*26BcOdrwfRkbGk9OsREyLA.png"></a>
+            <a class="carousel-item" href="#five!"><img src="https://i.ytimg.com/vi/qsDvJrGMSUY/maxresdefault.jpg"></a>
+        </div>
+
+        <section id="search" class="section section-search white white-text center scrollspy">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <h3>Search Decks</h3>
+                        <div class="input-field">
+                            <input class="white grey-text autocomplete" placeholder="Search Database for Decks"
+                                type="text" id="autocomplete-input">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </section>
+
+
+    <!--JavaScript at end of body for optimized loading-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+
+        const sideNav = document.querySelector('.sidenav');
+        M.Sidenav.init(sideNav, {});
+
+
+        const carousel = document.querySelector('.carousel');
+        M.Carousel.init(carousel, {
+            indicators: true,
+            height: 400,
+            width: 500,
+            transition: 600,
+            interval: 4000
+        });
+    </script>
+</body>
+
+</html>
