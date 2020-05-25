@@ -31,8 +31,8 @@ $(document).ready(function () {
             email: email,
             password: password
         })
-            .then(function () {
-                window.location.replace("/account");
+            .then(function (response) {
+                window.location.replace(response);
                 // If there's an error, log the error
             })
             .catch(function (err) {

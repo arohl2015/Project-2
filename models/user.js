@@ -13,23 +13,23 @@ module.exports = function (sequelize, DataTypes) {
       validate: {
         isEmail: true
       },
-    // The password cannot be null
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false
-       }
+      // The password cannot be null
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false
+      }
     }
   });
 
   // we need to create a custom method for our User model. 
   //This checks an unhashed password entered by the user and compares it to the hashed password stored in our database
-  User.prototype.validPassword = function(password, dbPassword) {
+  User.prototype.validPassword = function (password, dbPassword) {
     return bcrypt.compareSync(password, dbPassword);
   };
   // Hooks are automatic methods that run during various phases of the User Model lifecycle
   // In this case, before a User is created, we will automatically hash their password
 
-  User.addHook("beforeCreate", function(user) {
+  User.addHook("beforeCreate", function (user) {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
   });
 

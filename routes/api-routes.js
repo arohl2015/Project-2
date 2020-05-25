@@ -6,7 +6,7 @@ module.exports = function (app) {
     // Using the passport.authenticate middleware with our local strategy
     // we want to make sure the user with valid login credentials gets sent to the right page
     app.post("/api/login", passport.authenticate("local"), function (req, res) {
-        res.json("/account");
+        res.json("/deck");
     });
     // Route for signing up a user.
     // if the user is created successfully, proceed to log the user in or send back an error
@@ -59,7 +59,7 @@ module.exports = function (app) {
             res.json(dbCards);
         });
     });
-   
+
 
     app.get("/api/decks", function (req, res) {
         db.Card.findAll({
@@ -220,7 +220,7 @@ module.exports = function (app) {
     //         res.json(dbDeck);
     //     });
     // });
-     // //This will be a client side request when clicking a specific deck on the carousel
+    // //This will be a client side request when clicking a specific deck on the carousel
     // //Retrieve all cards in deck based off of click from carousel are all db decks
     // app.get("/api/decks/:id", function (req, res) {
     //     db.Deck.findOne({
