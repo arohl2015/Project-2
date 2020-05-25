@@ -1,7 +1,7 @@
 //giving credit to dev.to for developing the code for our passport.js to work correctly
 var db = require("../models");
 var passport = require("../config/passport");
-
+var dbs = require("../config/dbs")
 module.exports = function (app) {
     // Using the passport.authenticate middleware with our local strategy
     // we want to make sure the user with valid login credentials gets sent to the right page
@@ -92,17 +92,18 @@ module.exports = function (app) {
             })
     })
 
-    //Get the cards associated with deck ID (when clicking into deck)
-    // app.get("/api/cards/:DeckId", function (req, res) {
-    //     db.Card.findAll({
-    //         where: {
-    //             DeckId: req.params.DeckId
-    //         },
 
-    //     }).then(function (cards) {
-    //         res.json(cards);
-    //     })
-    // })
+    //Get the cards associated with deck ID (when clicking into deck)
+    app.get("/api/cards/:DeckId", function (req, res) {
+        db.sequelize.query(`SELECT users.email, users.id, decks.title, decks.body , cards.front, cards.back, cards.id cardId, decks.id decksId FROM 
+        users LEFT JOIN decks on users.id = decks.UserId
+        LEFT JOIN cards on cards.DeckId = decks.id
+        where decks.id =${req.params.DeckId}; `).then( (results) => {
+            res.json(results);
+        }).catch( err => {
+            res.status(500).send('Err executing command ' + err).end()
+        })
+    })
     //This will allow us to determine who the deck is created by
     // app.get("/api/decks/name/:id", function (req, res) {
     //     db.Deck.findAll({
