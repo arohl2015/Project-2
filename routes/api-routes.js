@@ -61,7 +61,7 @@ module.exports = function (app) {
     });
 
 
-    app.get("/api/decks", function (req, res) {
+    app.get("/api/decks/:DeckId", function (req, res) {
         db.Card.findAll({
             where: {
                 DeckId: req.params.DeckId

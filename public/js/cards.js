@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 function showdeckCards(deckId) {
 
-    $.get("/api/cards/" + deckId, function(results) {
+    $.get("/api/cards" + deckId, function(results) {
        console.log("results", results)
     })
 }
