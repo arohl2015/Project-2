@@ -17,11 +17,11 @@ $(document).ready(function () {
     }
 
     let postDeck = () => {
-        $('#add-deck').on('submit', (event) => {
-            event.preventDefault();
+        $('#add-deck').on('click', () => {
             let deck = {
-                title: titleInput.value(),
-                category: categoryInput.value()
+                title: titleInput.val(),
+                body: bodyInput.val(),
+                UserId: 1
             }
             addDeck(deck);
         })
@@ -29,7 +29,7 @@ $(document).ready(function () {
     }
 
     let addDeck = (deck) => {
-        $.post("/api/posts/", deck, () => {
+        $.post("/api/new/deck", deck, () => {
             window.location.href = "/deck";
         })
     }
@@ -40,6 +40,8 @@ $(document).ready(function () {
 
     addnewCard();
     postDeck();
+
+    showdeckCards(5);
 
 
 

@@ -1,136 +1,77 @@
 //giving credit to dev.to for developing the code for our passport.js to work correctly
 var db = require("../models");
 var passport = require("../config/passport");
-
+var dbs = require("../config/dbs")
 module.exports = function (app) {
     // Using the passport.authenticate middleware with our local strategy
     // we want to make sure the user with valid login credentials gets sent to the right page
     app.post("/api/login", passport.authenticate("local"), function (req, res) {
-        res.json(req.user);
+        res.json("/deck");
     });
     // Route for signing up a user.
     // if the user is created successfully, proceed to log the user in or send back an error
-    app.post("/api/signup", function(req, res) {
-      console.log(req.body);
-      db.User.create({
-        email: req.body.email,
-        password: req.body.password
-      }).then(function() {
-        res.redirect(307, "/api/login");
-      }).catch(function(err) {
-        console.log(err);
-        res.json(err);
-      });
+    app.post("/api/signup", function (req, res) {
+        console.log(req.body);
+        db.User.create({
+            email: req.body.email,
+            password: req.body.password
+        }).then(function () {
+            res.redirect(307, "/api/login");
+        }).catch(function (err) {
+            console.log(err);
+            res.json(err);
+        });
     });
     // Route that is used to log the user out
-    app.get("/logout", function(req, res) {
-      req.logout();
-      res.redirect("/");
+    app.get("/logout", function (req, res) {
+        req.logout();
+        res.redirect("/");
     });
-      // Route for getting some data about our user to be used client side
-  app.get("/api/user_data", function(req, res) {
-    if (!req.user) {
-      // The user is not logged in, send back an empty object
-      res.json({});
-    }
-    else {
-      // Send back the user's email and id
-      res.json({
-        email: req.user.email,
-        id: req.user.id
-      });
-    };
-    //Grab all decks
+    // Route for getting some data about our user to be used client side
+    app.get("/api/user_data", function (req, res) {
+        if (!req.User) {
+            // The user is not logged in, send back an empty object
+            res.json({});
+        }
+        else {
+            // Send back the user's email and id
+            res.json({
+                email: req.user.email,
+                id: req.user.id
+            });
+        }
+    });
+
     app.get("/api/decks", function (req, res) {
         db.Deck.findAll({}).then(function (dbDeck) {
             res.json(dbDeck);
-        })
-    })
-    //Retrieve specific deck based off of click
+        });
+    });
+    //Grab all decks
+    //This will be a client side request at the bottom of the home page showing all decks available
     app.get("/api/decks/:id", function (req, res) {
         db.Deck.findOne({
             where: {
                 id: req.params.id
-            }
-        }).then(function (dbDeck) {
-            res.json(dbDeck);
-        })
-    })
-    //Get the cards associated with deck ID (when clicking into deck)
-    app.get("/api/cards/:deckID", function (req, res) {
-        db.Cards.findAll({
-            where: {
-                deckID: req.params.deckId
-            }
-        }).then(function (cards) {
-            res.json(cards);
-        })
-    })
-    //This will allow us to determine who the deck is created by
-    app.get("/api/decks/name", function (req, res) {
-        db.Deck.findAll({
-            include: [{
-                model: db.User,
-                attributes: ['username'],
-                where: {
-                    userId: db.Sequelize.col('User.id')
-                }
-            }],
-        }).then(function (result) {
-            res.json(result);
-        })
-    })
-    //Add new deck 
-    app.post("/api/new/deck"), function (req, res) {
-        db.Deck.create({
-            id: req.body.id,
-            title: req.body.title,
-            body: req.body.body
-        }).then(function (result) {
-            res.json(result);
-        })
-    }
-    //Add new cards
-    app.post("/api/new/card"), function (req, res) {
-        db.Deck.create({
-            id: req.body.id,
-            front: req.body.front,
-            back: req.body.back
-        }).then(function (result) {
-            res.json(result);
-        })
-    }
-    // Update deck with corresponding ID (editting specific deck)
-    app.put("/api/decks/update/:id", function (req, res) {
-        db.Deck.update({
-            title: req.body.title,
-            body: req.body.body
-        }, {
-            where: {
-                id: req.params.id
-            }
+            },
+            include: [db.Card]
+        }).then(function (dbCards) {
+            res.json(dbCards);
+        });
+    });
 
-        }).then(function () {
-            res.json("Update")
-        })
-    })
-    //Update card within deck based off of id
-    app.put("/api/card/update/:id", function (req, res) {
-        db.Card.update({
-            front: req.body.front,
-            back: req.body.back
-        }, {
-            where: {
-                id: req.params.id
-            }
 
-        }).then(function () {
-            res.json("Update")
+    app.get("/api/decks/:DeckId", function (req, res) {
+        db.Card.findAll({
+            where: {
+                DeckId: req.params.DeckId
+            },
+        }).then(function (dbCards) {
+            res.json(dbCards);
         })
     })
 
-    //delete from user decks (should this be a delete request to user decks instead of deck?)
-    app.delete("/api/decks/delete/:id", function (req, res) {
+    app.delete("/api/decks/:id", function (req, res) {
         db.Deck.destroy({
             where: {
                 id: req.params.id
@@ -138,44 +79,120 @@ module.exports = function (app) {
         }).then(function (dbDeck) {
             res.json(dbDeck);
         });
-    });
-    //Deletes the card from the corresponding deck (userdeck)
-    app.delete("/api/card/delete/:id", function (req, res) {
-        db.Card.destroy({
-            where: {
-                id: req.params.id
-            }
-        }).then(function (dbCard) {
-            res.json(dbCard);
-        });
-    });
-
-
-    // user
+    })
 
 
 
-    // deck  /api/deck
-   // app.get()   /// all
-   // app.get    // one  // url include an id
-   // app.post
-   // app.put      // url include an id
-   // app.delete  // url is including an id
+    app.post("/api/decks", function (req, res) {
+        db.Deck.create(req.body).then(function (dbDeck) {
+            res.json(dbDeck);
+        })
+            .then(function () {
+                res.json("Update")
+            })
+    })
 
 
-    // card  // post need the deckID (pass in the req.params and the body with the info of the card)
-    // app.post("/api/card/:id)
-
-    //userdeck  (post and delete) post("api/userdeck/:userId/:deckId)
-
-    // app.get("/api/decks", function (req, res) {
-
+    //Get the cards associated with deck ID (when clicking into deck)
+    app.get("/api/cards/:DeckId", function (req, res) {
+        db.sequelize.query(`SELECT users.email, users.id, decks.title, decks.body , cards.front, cards.back, cards.id cardId, decks.id decksId FROM 
+        users LEFT JOIN decks on users.id = decks.UserId
+        LEFT JOIN cards on cards.DeckId = decks.id
+        where decks.id =${req.params.DeckId}; `).then( (results) => {
+            res.json(results);
+        }).catch( err => {
+            res.status(500).send('Err executing command ' + err).end()
+        })
+    })
+    //This will allow us to determine who the deck is created by
+    // app.get("/api/decks/name/:id", function (req, res) {
     //     db.Deck.findAll({
-    //         include: [db.category]
-    //     }).then(function (dbDeck) {
-    //         res.json(dbDeck);
+
+    //         include: [{
+    //             model: db.User,
+    //             attributes: ['email'],
+    //             where: {
+    //                 userId: db.Sequelize.col('User.id'),
+    //                 DeckId: req.params.id
+    //             }
+    //         }],
+    //     }).then(function (result) {
+    //         res.json(result);
+    //     })
+    // })
+    //Add new deck 
+    // app.post("/api/new/deck", function (req, res) {
+    //     console.log("req.body", req.body)
+    //     db.Deck.create(
+    //         {
+    //             title: req.body.title,
+    //             body: req.body.body,
+    //             id: req.body.id
+    //         }
+    //     ).then(function (result) {
+    //         console.log(result.id);
+    //         db.Card.create({
+    //             front: req.body.front,
+    //             back: req.body.back,
+    //             DeckId: result.id
+    //         }).then(function (result) {
+    //             res.json(result);
+    //         })
+
+
+    //     })
+    // })
+
+    //Add new cards
+    // app.post("/api/new/card", function (req, res) {
+    //     console.log("req.body", req.body)
+    //     db.Card.create({
+
+    //         front: req.body.front,
+    //         back: req.body.back,
+    //         DeckId: req.body.DeckId
+
+    //     }).then(function (result) {
+    //         res.json(result);
+    //     })
+    // }
+    // )
+
+    // //Update card within deck based off of id
+    // app.put("/api/card/update/:id", function (req, res) {
+    //     db.Card.update({
+    //         front: req.body.front,
+    //         back: req.body.back
+    //     }, {
+    //         where: {
+    //             id: req.params.id
+    //         }
+
+    //     }).then(function () {
+    //         res.json("Update")
+    //     })
+    // })
+
+    //This will delete the user saved decks (in the carousel)
+
+
+
+
+
+    //Deletes the card from the corresponding deck (userdeck)
+    // app.delete("/api/card/decks/:id", function (req, res) {
+    //     db.Card.destroy({
+    //         where: {
+    //             id: req.params.id
+    //         }
+    //     }).then(function (dbCard) {
+    //         res.json(dbCard);
     //     });
     // });
+
+
+
+
 
     // app.get("/api/decks/:id", function (req, res) {
 
@@ -209,5 +226,24 @@ module.exports = function (app) {
     //         res.json(dbDeck);
     //     });
     // });
+    // //This will be a client side request when clicking a specific deck on the carousel
+    // //Retrieve all cards in deck based off of click from carousel are all db decks
+    // app.get("/api/decks/:id", function (req, res) {
+    //     db.Deck.findOne({
+    //         where: {
+    //             id: req.params.id
+    //         }
+    //     }).then(function (req, res) {
+    //         db.Card.findAll({
+    //             where: {
+    //                 DeckId: req.params.DeckId
+    //             },
+    //         })
 
-};
+    //             .then(function (dbCards) {
+    //                 res.json(dbCards);
+    //             })
+    //     })
+    // })
+
+}
