@@ -1,6 +1,4 @@
-// most of the below code was provided by passport.js documentation and the dev.to website
-//on using local storage for authentication
-//https://jonathas.com/token-based-authentication-in-nodejs-with-passport-jwt-and-bcrypt/
+//Referencing this website: https://jonathas.com/token-based-authentication-in-nodejs-with-passport-jwt-and-bcrypt/
 var passport = require("passport");
 var jwt = require("jwt-simple");
 var moment = require("moment");
@@ -34,7 +32,7 @@ passportConfig.genToken = (user) => {
   const expires = moment().utc().add({ days: 7 }).unix();
 
   // Whaterever we pass to jwt.encode function is the payload that will be later
-  // decoded anv available to the jwtStrategy
+  // decoded and available to the jwtStrategy
   // In this case, our payload is this:
   /*
   {
