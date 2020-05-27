@@ -31,8 +31,10 @@ $(document).ready(function () {
             email: email,
             password: password
         })
-            .then(function (response) {
-                window.location.replace(response);
+            .then(function (tokenData) {
+                localStorage.authToken = JSON.stringify(tokenData);
+
+                //  window.location.replace(response);
                 // If there's an error, log the error
             })
             .catch(function (err) {

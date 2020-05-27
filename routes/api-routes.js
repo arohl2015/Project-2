@@ -1,13 +1,40 @@
-//giving credit to dev.to for developing the code for our passport.js to work correctly
+
 var db = require("../models");
 var passport = require("../config/passport");
 var dbs = require("../config/dbs")
 module.exports = function (app) {
-    // Using the passport.authenticate middleware with our local strategy
-    // we want to make sure the user with valid login credentials gets sent to the right page
-    app.post("/api/login", passport.authenticate("local"), function (req, res) {
-        res.json("/deck");
+
+    //Takes email & Password from client & checks if the user exists and password is correct
+    //If that is the case it is going to create a token and pass it back to the client
+    app.post("/api/login", function (req, res) {
+        const { email, password } = req.body;
+        const dbUser = db.User.findOne({ where: { email } }).catch(err => {
+            res.status(500).json({ err, message: "Something unexpected happened" });
+        });
+
+        dbUser.then(user => {
+            if (!user) {
+                res.status(401).json({
+                    message: "User not found."
+                });
+            } else if (!user.validPassword(password, user.get('password'))) {
+                console.log(user.get('password'));
+                console.log(user.validPassword(password, user.get('password')));
+                res.status.json({
+                    message: "Incorrect password."
+                });
+            } else {
+                const token = passport.genToken(user.toJSON());
+                res.json(token);
+            }
+        })
+
     });
+    //true if the user has been successfully authenticated and has a token, not authenticated the middleware will return no token
+    app.post("/api/verifyToken", function (req, res) {
+        res.json({ success: true });
+    });
+
     // Route for signing up a user.
     // if the user is created successfully, proceed to log the user in or send back an error
     app.post("/api/signup", function (req, res) {
@@ -28,19 +55,19 @@ module.exports = function (app) {
         res.redirect("/");
     });
     // Route for getting some data about our user to be used client side
-    app.get("/api/user_data", function (req, res) {
-        if (!req.User) {
-            // The user is not logged in, send back an empty object
-            res.json({});
-        }
-        else {
-            // Send back the user's email and id
-            res.json({
-                email: req.user.email,
-                id: req.user.id
-            });
-        }
-    });
+    // app.get("/api/user_data", function (req, res) {
+    //     if (!req.User) {
+    //         // The user is not logged in, send back an empty object
+    //         res.json({});
+    //     }
+    //     else {
+    //         // Send back the user's email and id
+    //         res.json({
+    //             email: req.user.email,
+    //             id: req.user.id
+    //         });
+    //     }
+    // });
 
     app.get("/api/decks", function (req, res) {
         db.Deck.findAll({}).then(function (dbDeck) {
@@ -98,9 +125,9 @@ module.exports = function (app) {
         db.sequelize.query(`SELECT users.email, users.id, decks.title, decks.body , cards.front, cards.back, cards.id cardId, decks.id decksId FROM 
         users LEFT JOIN decks on users.id = decks.UserId
         LEFT JOIN cards on cards.DeckId = decks.id
-        where decks.id =${req.params.DeckId}; `).then( (results) => {
+        where decks.id =${req.params.DeckId}; `).then((results) => {
             res.json(results);
-        }).catch( err => {
+        }).catch(err => {
             res.status(500).send('Err executing command ' + err).end()
         })
     })
