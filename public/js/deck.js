@@ -43,7 +43,7 @@ $(document).ready(function () {
     addnewCard();
     postDeck();
 
-    showdeckCards(5);
+
 
 
 
