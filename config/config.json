@@ -2,22 +2,22 @@
   "development": {
     "username": "root",
     "password": "password",
-    "database": "Assimilate",
-    "host": "127.0.0.1",
+    "database": "test_db",
+    "host": "localhost",
     "dialect": "mysql" 
   },
   "test": {
     "username": "root",
     "password": "password",
-    "database": "Assimilate",
-    "host": "127.0.0.1",
+    "database": "test_db",
+    "host": "localhost",
     "dialect": "mysql" 
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "password": "password",
+    "database": "test_db",
+    "host": "localhost",
     "dialect": "mysql" 
   }
 }

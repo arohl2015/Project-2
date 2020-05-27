@@ -88,7 +88,7 @@ module.exports = function (app) {
     });
 
 
-    app.get("/api/decks", function (req, res) {
+    app.get("/api/allcards/:DeckId", function (req, res) {
         db.Card.findAll({
             where: {
                 DeckId: req.params.DeckId
@@ -131,6 +131,10 @@ module.exports = function (app) {
             res.status(500).send('Err executing command ' + err).end()
         })
     })
+    app.get("/api/card", function (req, res) {
+        res.json({name:"First card"})
+    })
+
     //This will allow us to determine who the deck is created by
     // app.get("/api/decks/name/:id", function (req, res) {
     //     db.Deck.findAll({
@@ -233,8 +237,13 @@ module.exports = function (app) {
     //     });
     // });
 
-    // app.category("/api/decks", function (req, res) {
-    //     db.Deck.create(req.body).then(function (dbDeck) {
+    // app.post("/api/decks", function (req, res) {
+        // add userId  (this is comming if using passprot req.user)y
+        // console.log(req.user)
+        // console.log(req.body)
+        // let newDeck = req.body
+        // newDeck.UserId = req.user.id
+    //     db.Deck.create(newDeck).then(function (dbDeck) {
     //         res.json(dbDeck);
     //     });
     // });
