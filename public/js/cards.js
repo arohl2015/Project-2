@@ -6,5 +6,4 @@ function showdeckCards(deckId) {
        console.log("results", results)
     })
 }
-
-}
+});
