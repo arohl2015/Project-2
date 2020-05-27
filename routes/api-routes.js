@@ -104,6 +104,10 @@ module.exports = function (app) {
             res.status(500).send('Err executing command ' + err).end()
         })
     })
+    app.get("/api/card", function (req, res) {
+        res.json({name:"First card"})
+    })
+
     //This will allow us to determine who the deck is created by
     // app.get("/api/decks/name/:id", function (req, res) {
     //     db.Deck.findAll({
