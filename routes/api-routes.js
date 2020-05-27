@@ -91,7 +91,7 @@ module.exports = function (app) {
     app.get("/api/allcards/:DeckId", function (req, res) {
         db.Card.findAll({
             where: {
-                DeckId: req.params.DeckId
+               DeckId: req.params.DeckId
             },
         }).then(function (dbCards) {
             res.json(dbCards);
