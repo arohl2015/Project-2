@@ -7,6 +7,8 @@ let backofCard;
 
 
 $(document).ready(function () {
+    ensureLoggedIn();
+
     let addnewCard = () => {
         $('#add-card').on('click', () => {
             alert("card added")
