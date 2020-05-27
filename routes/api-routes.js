@@ -61,7 +61,7 @@ module.exports = function (app) {
     });
 
 
-    app.get("/api/decks/:DeckId", function (req, res) {
+    app.get("/api/allcards/:DeckId", function (req, res) {
         db.Card.findAll({
             where: {
                 DeckId: req.params.DeckId
@@ -206,8 +206,13 @@ module.exports = function (app) {
     //     });
     // });
 
-    // app.category("/api/decks", function (req, res) {
-    //     db.Deck.create(req.body).then(function (dbDeck) {
+    // app.post("/api/decks", function (req, res) {
+        // add userId  (this is comming if using passprot req.user)y
+        // console.log(req.user)
+        // console.log(req.body)
+        // let newDeck = req.body
+        // newDeck.UserId = req.user.id
+    //     db.Deck.create(newDeck).then(function (dbDeck) {
     //         res.json(dbDeck);
     //     });
     // });
