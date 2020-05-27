@@ -34,7 +34,7 @@ $(document).ready(function () {
             .then(function (tokenData) {
                 localStorage.authToken = JSON.stringify(tokenData);
 
-                //  window.location.replace(response);
+                window.location.href = '/deck';;
                 // If there's an error, log the error
             })
             .catch(function (err) {
