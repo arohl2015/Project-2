@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">title</i>
-                    <input type="text" id="autocomplete-input" class="autocomplete" placeholder="Deck Title">
+                    <input type="text"  id="autocomplete-input" class="title autocomplete" placeholder="Deck Title">
                     <label for="autocomplete-input"></label>
                 </div>
             </div>
@@ -50,41 +50,44 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">textsms</i>
-                    <input type="text" id="autocomplete-input" class="autocomplete" placeholder="Deck Category">
+                    <input type="text" id="autocomplete-input" class="category autocomplete" placeholder="Deck Category">
                     <label for="autocomplete-input"></label>
                 </div>
             </div>
         </div>
     </div>
+    <div class="add-input">
+        <div class="row deck__card">
+            <form class="col s5">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">code</i>
+                        <textarea id="textarea1" class="materialize-textarea" placeholder="Front of Card"></textarea>
+                        <label for="textarea1"></label>
+                    </div>
+                </div>
+            </form>
+            <form class="col s5">
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">code</i>
+                        <textarea id="textarea1" class="materialize-textarea" placeholder="Back of Card"></textarea>
+                        <label for="textarea1"></label>
+                    </div>
+                </div>
+            </form>
 
-    <div class="row add-input">
-        <form class="col s5">
-            <div class="row">
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">code</i>
-                    <textarea id="textarea1" class="materialize-textarea" placeholder="Front of Card"></textarea>
-                    <label for="textarea1"></label>
-                </div>
+            <div class="col s2">
+                <a class="waves-effect waves-light btn" id="add-card"><i class="material-icons left">add</i>Add Card</a>
             </div>
-        </form>
-        <form class="col s5">
-            <div class="row">
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">code</i>
-                    <textarea id="textarea1" class="materialize-textarea" placeholder="Back of Card"></textarea>
-                    <label for="textarea1"></label>
-                </div>
-            </div>
-        </form>
-        <div class="col s2">
-            <a class="waves-effect waves-light btn" id="add-card"><i class="material-icons left">add</i>Add Card</a>
         </div>
     </div>
     <div class="row">
         <div class="col s12">
-            <a class="waves-effect waves-light btn" id = "add-deck"><i class="material-icons left">add</i>Add Deck</a>
+            <a class="waves-effect waves-light btn" id="add-deck"><i class="material-icons left">add</i>Add Deck</a>
         </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/js/utilities.js"></script>
     <script src="/js/deck.js"></script>

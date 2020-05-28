@@ -1,3 +1,4 @@
+const Deck = require("./deck")
 module.exports = function (sequelize, DataTypes) {
     var Card = sequelize.define("Card", {
         front: {
