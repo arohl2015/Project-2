@@ -13,7 +13,7 @@ _Assimilate was created by our team for Project 2 of of the University of Arizon
 For our new technologies, Materialize was used to create the client-side UI. For authentication of users, Passport.js was used and set to work with our local database storage.
 
 ## Getting Started:
-* For a live demo, please go to the following link: `[_Assimilate](https://----placeholder----.herokuapp.com/)
+* For a live demo, please go to the following link: `[_Assimilate](https://secure-savannah-47093.herokuapp.com/)
 * Github Repo: [_Assimilate](https://github.com/arohl2015/Project-2)
 
 ## App Example:
