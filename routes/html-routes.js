@@ -50,8 +50,8 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, "../public/newdeck.html"));
   });
 
-  app.get("/authors", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/author-manager.html"));
+  app.get("/account", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/account.html"));
   });
 
 };

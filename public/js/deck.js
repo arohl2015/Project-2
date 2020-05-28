@@ -22,7 +22,7 @@ $(document).ready(function () {
         $('#add-deck').on('click', () => {
             let deck = {
                 title: titleInput.val(),
-                body: bodyInput.val(),
+                category: categoryInput.val(),
                 UserId: 1
             }
             addDeck(deck);
