@@ -25,13 +25,13 @@ passportConfig.initialize = () => {
 // for the given user based on the configs provided (expirationTime, custom salt SECRET
 
 // custom salt SECRET: whenever you're using crypto hashes, you want to add some specific custom noise
-// that only yours app know about, so even if someone else hashes the exact same value, they're not going to
+// that only your app know about, so even if someone else hashes the exact same value, they're not going to
 // be able to revert because your unique custom hash is making sure that values are different
 
 passportConfig.genToken = (user) => {
   const expires = moment().utc().add({ days: 7 }).unix();
 
-  // Whaterever we pass to jwt.encode function is the payload that will be later
+  // Whatever we pass to jwt.encode function is the payload that will be later
   // decoded and available to the jwtStrategy
   // In this case, our payload is this:
   /*
