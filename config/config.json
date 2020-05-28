@@ -2,14 +2,14 @@
   "development": {
     "username": "root",
     "password": "password",
-    "database": "test_db",
+    "database": "assimilate",
     "host": "localhost",
     "dialect": "mysql" 
   },
   "test": {
     "username": "root",
     "password": "password",
-    "database": "test_db",
+    "database": "assimilate",
     "host": "localhost",
     "dialect": "mysql" 
   },
