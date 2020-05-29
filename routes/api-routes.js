@@ -91,7 +91,7 @@ module.exports = function (app) {
     app.get("/api/card/:CardId", function (req, res) {
         db.Card.findOne({
             where: {
-                DeckId: req.params.CardId
+                id: req.params.CardId
             },
         }).then(function (dbCards) {
             res.json(dbCards);

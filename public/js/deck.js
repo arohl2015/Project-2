@@ -12,7 +12,7 @@ $(document).ready(function () {
     // on the add card button when clicked append to container
     let addnewCard = () => {
         $('#add-card').on('click', () => {
-            alert("card added")
+            
             let addcardHTML = $('<div class="row deck__card"><form class="col s5"><div class="row"><div class="input-field col s6"><i class="material-icons prefix">code</i><textarea id="textarea1" class="materialize-textarea" placeholder="Front of Card"></textarea><label for="textarea1"></label></div></div></form><form class="col s5"><div class="row"><div class="input-field col s6"><i class="material-icons prefix">code</i><textarea id="textarea1" class="materialize-textarea" placeholder="Back of Card"></textarea><label for="textarea1"></label></div></div></form>')
             let containertoaddCard = $('.add-input');
             containertoaddCard.append(addcardHTML);
