@@ -63,7 +63,7 @@
     </div>
 
     <section class="slider">
-        <div class="carousel">
+        <div class="carousel-initialize" style="display: none;">
 
             <a class="carousel-item" href=""><img class="topics" cat="javaScript"
                     src="https://www.bitdegree.org/tutorials/wp-content/uploads/2018/10/Top-10-Tips-To-Learn-JavaScript.jpg"></a>
@@ -107,8 +107,13 @@
         M.Sidenav.init(sideNav, {});
 
 
-        const carousel = document.querySelector('.carousel');
-        M.Carousel.init(carousel, {
+        const carousel = document.querySelector('.carousel-initialize').cloneNode(true);
+        carousel.classList.remove('carousel-initialize');
+        carousel.classList.add('carousel');
+        carousel.style.display = "block";
+
+        document.querySelector('.slider').prepend(carousel);
+        carouselInstance = M.Carousel.init(carousel, {
             indicators: true,
             height: 400,
             width: 500,

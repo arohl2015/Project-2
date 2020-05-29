@@ -4,7 +4,7 @@ $(document).ready(function () {
     function showdeckCards(deckId) {
         // deckId = 1   /// thes is for testing 
 
-        $.get("/api/allcards/" + deckId, function (results) {
+        fetchApi({ url: "/api/allcards/" + deckId, method: "GET" }).then((results) => {
             console.log("results", results, results.length)
 
             //show the info on the screen, build li and append to the ul class collecition 
@@ -14,7 +14,7 @@ $(document).ready(function () {
                 console.log("---->", results[i])
                 var liCard = `   <li class="collection-item avatar">
        <i class="material-icons circle green" } >code</i>
-       <span class="title" back=${results[i].back}>${results[i].front}</span>
+       <a href="/card?cardId=${results[i].id}"><span class="title" back=${results[i].back}>${results[i].front}</span></a>
        <p> <br>
        
        </p>
@@ -26,16 +26,19 @@ $(document).ready(function () {
 
 
             //en of the llop
-            $(".title").on("click", function () {
-                event.preventDefault()
-                console.log(this)
-                var back = $(this).attr("back")
-                $(this).text(back)
-            })
+            /* $(".title").on("click", function () {
+                 event.preventDefault()
+                 console.log(this)
+                 var back = $(this).attr("back")
+                 $(this).text(back)
+             })*/
             // add onclick to the cards  (this will flip the card)
         })
     }
 
-    showdeckCards(17)
+    let params = (new URL(document.location)).searchParams;
+    let deckId = params.get('deckId')
+
+    showdeckCards(deckId)
 
 })
