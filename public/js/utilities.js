@@ -2,7 +2,6 @@
 const getAuthHeaders = () => {
     // Grabbing the authentication token from the local storage & if there is no token return an empty object
     const jwtData = JSON.parse(localStorage.authToken || '{}');
-    // The get token function is return the token we just grabbed
 
     //Injecting token into the headers, has to be in the header so that the back end is 
     // going to read the authorization key in the header in order to allow someone to interact with the api

@@ -5,9 +5,9 @@ $(document).ready(function () {
     <div class="col s6 m6">
       <div class="card blue-grey darken-1">
         <div class="card-content white-text">
-          <span class="card-title">${title}</span>
-          <p>${body}</p>
-          <button>Add to deck</button>
+          <span class="card-title" style ="text-align: center">${title}</span>
+          <p style ="text-align: center">${body}</p>
+          <a class="btn-floating btn-large waves-effect waves-light red button" style ="text-align: center"><i class="material-icons">add</i></a>
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@ $(document).ready(function () {
         const cardEl = document.createElement('div');
         cardEl.innerHTML = cardGen(title, body);
         //Finding the button inside the card element on click
-        $(cardEl).find('button').click(e => {
+        $(cardEl).find('.button').click(e => {
             //Instatiating an HTML element and then changing the htrml to the carousel deck & data
             const cardDeck = document.createElement('div');
             cardDeck.innerHTML = cardDeckGen(title, body, id);

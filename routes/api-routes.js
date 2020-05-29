@@ -54,20 +54,7 @@ module.exports = function (app) {
         req.logout();
         res.redirect("/");
     });
-    // Route for getting some data about our user to be used client side
-    // app.get("/api/user_data", function (req, res) {
-    //     if (!req.User) {
-    //         // The user is not logged in, send back an empty object
-    //         res.json({});
-    //     }
-    //     else {
-    //         // Send back the user's email and id
-    //         res.json({
-    //             email: req.user.email,
-    //             id: req.user.id
-    //         });
-    //     }
-    // });
+
 
     app.get("/api/decks", function (req, res) {
         db.Deck.findAll({}).then(function (dbDeck) {
@@ -146,22 +133,7 @@ module.exports = function (app) {
         res.json({ name: "First card" })
     })
 
-    //This will allow us to determine who the deck is created by
-    // app.get("/api/decks/name/:id", function (req, res) {
-    //     db.Deck.findAll({
 
-    //         include: [{
-    //             model: db.User,
-    //             attributes: ['email'],
-    //             where: {
-    //                 userId: db.Sequelize.col('User.id'),
-    //                 DeckId: req.params.id
-    //             }
-    //         }],
-    //     }).then(function (result) {
-    //         res.json(result);
-    //     })
-    // })
     //Add new deck 
     //At the specified route creating a new deck in the deck table
     app.post("/api/new/deck", function (req, res) {
@@ -185,6 +157,38 @@ module.exports = function (app) {
             })
         })
     })
+
+        //This will allow us to determine who the deck is created by
+    // app.get("/api/decks/name/:id", function (req, res) {
+    //     db.Deck.findAll({
+
+    //         include: [{
+    //             model: db.User,
+    //             attributes: ['email'],
+    //             where: {
+    //                 userId: db.Sequelize.col('User.id'),
+    //                 DeckId: req.params.id
+    //             }
+    //         }],
+    //     }).then(function (result) {
+    //         res.json(result);
+    //     })
+    // })
+
+    // Route for getting some data about our user to be used client side
+    // app.get("/api/user_data", function (req, res) {
+    //     if (!req.User) {
+    //         // The user is not logged in, send back an empty object
+    //         res.json({});
+    //     }
+    //     else {
+    //         // Send back the user's email and id
+    //         res.json({
+    //             email: req.user.email,
+    //             id: req.user.id
+    //         });
+    //     }
+    // });
 
 
     //     })

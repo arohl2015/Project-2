@@ -1,3 +1,4 @@
+//Creating a card model using the Sequelize ORM
 const Deck = require("./deck")
 module.exports = function (sequelize, DataTypes) {
     var Card = sequelize.define("Card", {
@@ -17,6 +18,7 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
+    //The parent of a card is it's respective deck
     Card.associate = function (models) {
         Card.belongsTo(models.Deck);
     }

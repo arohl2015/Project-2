@@ -6,7 +6,7 @@ $(document).ready(function () {
     //location object which holds parts like pathname, port, etc...
     //The new URL object allows us to grab the search parameters that
     //is why it is instantiated. The.get within the URL, within the search
-    // Params object has the get method which gives back the ID
+    //Params object has the get method which gives back the ID
     let params = (new URL(document.location)).searchParams;
     let cardId = params.get('cardId')
     fetchApi({
