@@ -6,6 +6,7 @@
 // =============================================================
 var express = require("express");
 var session = require("express-session");
+var body = require("body-parser");
 
 // Requiring passport
 var passport = require("./config/passport");
