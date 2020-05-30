@@ -1,5 +1,5 @@
 {
-  "name": "project-2",
+  "name": "Project-2",
   "version": "1.0.0",
   "description": "_Assimilate is a full-stack application that utilizes MYSQL, Sequelize, Node, Express, and Passport.",
   "main": "server.js",
@@ -7,7 +7,6 @@
     "bcrypt": "^4.0.1",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.7.2",
-    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
