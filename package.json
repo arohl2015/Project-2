@@ -1,5 +1,5 @@
 {
-  "name": "project-2",
+  "name": "Project-2",
   "version": "1.0.0",
   "description": "_Assimilate is a full-stack application that utilizes MYSQL, Sequelize, Node, Express, and Passport.",
   "main": "server.js",
