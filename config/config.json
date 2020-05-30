@@ -1,16 +1,16 @@
 {
   "development": {
     "username": "root",
-    "password": "Odyca@20330",
-    "database": "test",
-    "host": "127.0.0.1",
+    "password": "password",
+    "database": "test_db",
+    "host": "localhost",
     "dialect": "mysql" 
   },
   "test": {
     "username": "root",
-    "password": "Odyca@20330",
-    "database": "test",
-    "host": "127.0.0.1",
+    "password": "password",
+    "database": "test_db",
+    "host": "localhost",
     "dialect": "mysql" 
   },
   "production": {

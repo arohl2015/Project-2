@@ -1,3 +1,4 @@
+//Creating a deck model using the Sequelize ORM
 module.exports = function (sequelize, DataTypes) {
     var Deck = sequelize.define("Deck", {
         title: {
@@ -16,6 +17,7 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
+    //The parent of the deck is the user & decks can have many users
     Deck.associate = function (models) {
         Deck.belongsTo(models.User);
         Deck.hasMany(models.UserDecks, {

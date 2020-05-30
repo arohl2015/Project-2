@@ -1,19 +1,27 @@
 {
-  "name": "Project-2",
+  "name": "project-2",
   "version": "1.0.0",
-  "description": "",
+  "description": "_Assimilate is a full-stack application that utilizes MYSQL, Sequelize, Node, Express, and Passport.",
   "main": "server.js",
   "dependencies": {
     "bcrypt": "^4.0.1",
     "bcryptjs": "^2.4.3",
+    "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "express-validator": "^2.20.8",
+    "jwt-simple": "^0.5.6",
+    "moment": "^2.26.0",
+    "mongoose": "^5.9.16",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
     "passport": "^0.4.1",
+    "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
-    "sequelize": "^5.21.8"
+    "sequelize": "^5.21.8",
+    "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {},
   "scripts": {

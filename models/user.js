@@ -1,3 +1,4 @@
+//The User model
 // code below is from from dev.to - we are not using handlebars
 // our team decided to use email vs username which is the passport.js default
 //we import bcrypt which we need to secure passwords.
@@ -36,7 +37,7 @@ module.exports = function (sequelize, DataTypes) {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
   });
 
-
+  //Users can have many decks
   User.associate = function (models) {
     User.hasMany(models.Deck, { onDelete: 'cascade' });
   };

@@ -23,7 +23,7 @@ $(document).ready(function () {
         password.val("");
     });
 
-    // loginUser does a post to our "api/login" route
+    // LoginUser does a post to our "api/login" route
     function loginUser(email, password) {
         console.log("enter loginUser function")
         console.log(email + password)
@@ -31,8 +31,11 @@ $(document).ready(function () {
             email: email,
             password: password
         })
-            .then(function (response) {
-                window.location.replace(response);
+            .then(function (tokenData) {
+                //Sets the authentication token in local storage to the token data from the server
+                localStorage.authToken = JSON.stringify(tokenData);
+
+                window.location.href = '/deck';;
                 // If there's an error, log the error
             })
             .catch(function (err) {
