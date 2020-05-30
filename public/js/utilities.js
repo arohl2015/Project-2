@@ -1,13 +1,13 @@
 
 const getAuthHeaders = () => {
-    const getToken = () => {
-        const jwtData = JSON.parse(localStorage.authToken || '{}');
-        return jwtData.token;
-    }
+    // Grabbing the authentication token from the local storage & if there is no token return an empty object
+    const jwtData = JSON.parse(localStorage.authToken || '{}');
 
+    //Injecting token into the headers, has to be in the header so that the back end is 
+    // going to read the authorization key in the header in order to allow someone to interact with the api
     return {
         headers: {
-            "Authorization": getToken()
+            "Authorization": jwtData.token
         }
     }
 }
@@ -27,8 +27,9 @@ const fetchApi = (options) => {
       const obj2: { c: 10, e: 34 }
       Object.assign(obj1, obj2) // { a: 1, b: 2, c: 10, e: 35}
     */
-    const mergeOptions = Object.assign(defaultHeaders, options);
-    return $.ajax(mergeOptions) // Sane options passed to an ajax object { url: apiUrl, method: "POST" }
+    const mergeOptions = Object.assign(defaultHeaders, options); // { url: apiUrl, method: "POST", headers: { Authorization: "JWT ey2131312313" } }
+    return $.ajax(mergeOptions) // Same options passed to an ajax object { url: apiUrl, method: "POST" }
+    //Does an ajax call with the options and default headers
 }
 
 

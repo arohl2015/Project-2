@@ -2,22 +2,22 @@
   "development": {
     "username": "root",
     "password": "password",
-    "database": "test_db",
+    "database": "assimilate",
     "host": "localhost",
     "dialect": "mysql" 
   },
   "test": {
     "username": "root",
     "password": "password",
-    "database": "test_db",
+    "database": "assimilate",
     "host": "localhost",
     "dialect": "mysql" 
   },
   "production": {
-    "username": "ipauzey7o9al47tx",
-    "password": "s1mfetwg3uqffpn6",
-    "database": "mxnk8p1dwoqyypee",
-    "host": "pqxt96p7ysz6rn1f.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    "dialect": "mysql"  
+    "username": "e66kkeipalcjjnd1",
+    "password": "gojlqy2t0rr05xir",
+    "database": "x6tum9uohzbulgmp",
+    "host": "tviw6wn55xwxejwj.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql" 
   }
 }

@@ -35,7 +35,7 @@ module.exports = function (app) {
         res.json({ success: true });
     });
 
-    // Route for signing up a user.
+    // Route for signing up a user.3
     // if the user is created successfully, proceed to log the user in or send back an error
     app.post("/api/signup", function (req, res) {
         console.log(req.body);
@@ -54,20 +54,7 @@ module.exports = function (app) {
         req.logout();
         res.redirect("/");
     });
-    // Route for getting some data about our user to be used client side
-    // app.get("/api/user_data", function (req, res) {
-    //     if (!req.User) {
-    //         // The user is not logged in, send back an empty object
-    //         res.json({});
-    //     }
-    //     else {
-    //         // Send back the user's email and id
-    //         res.json({
-    //             email: req.user.email,
-    //             id: req.user.id
-    //         });
-    //     }
-    // });
+
 
     app.get("/api/decks", function (req, res) {
         db.Deck.findAll({}).then(function (dbDeck) {
@@ -88,10 +75,21 @@ module.exports = function (app) {
     });
 
 
+    app.get("/api/card/:CardId", function (req, res) {
+        db.Card.findOne({
+            where: {
+                id: req.params.CardId
+            },
+        }).then(function (dbCards) {
+            res.json(dbCards);
+        })
+    })
+
+
     app.get("/api/allcards/:DeckId", function (req, res) {
         db.Card.findAll({
             where: {
-               DeckId: req.params.DeckId
+                DeckId: req.params.DeckId
             },
         }).then(function (dbCards) {
             res.json(dbCards);
@@ -132,10 +130,35 @@ module.exports = function (app) {
         })
     })
     app.get("/api/card", function (req, res) {
-        res.json({name:"First card"})
+        res.json({ name: "First card" })
     })
 
-    //This will allow us to determine who the deck is created by
+
+    //Add new deck 
+    //At the specified route creating a new deck in the deck table
+    app.post("/api/new/deck", function (req, res) {
+        console.log("req.body", req.body)
+        db.Deck.create(
+            {
+                title: req.body.title,
+                body: req.body.category,
+                //This is the name of the UserID in the deck table
+                UserId: req.body.userId
+            }
+        ).then(function (result) {
+            console.log(result.id);
+            // All the cards that were just received on the front end are associated with the
+            // result parameter in the promise which contains the DeckId. The map is mapping
+            // each of the cards to the respective DeckId. We need the object.assign because
+            // we are combining the card & the deck object.
+            const cards = req.body.cards.map(card => Object.assign(card, { DeckId: result.id }))
+            db.Card.bulkCreate(cards).then(function (result) {
+                res.json(result);
+            })
+        })
+    })
+
+        //This will allow us to determine who the deck is created by
     // app.get("/api/decks/name/:id", function (req, res) {
     //     db.Deck.findAll({
 
@@ -151,24 +174,21 @@ module.exports = function (app) {
     //         res.json(result);
     //     })
     // })
-    //Add new deck 
-    // app.post("/api/new/deck", function (req, res) {
-    //     console.log("req.body", req.body)
-    //     db.Deck.create(
-    //         {
-    //             title: req.body.title,
-    //             body: req.body.body,
-    //             id: req.body.id
-    //         }
-    //     ).then(function (result) {
-    //         console.log(result.id);
-    //         db.Card.create({
-    //             front: req.body.front,
-    //             back: req.body.back,
-    //             DeckId: result.id
-    //         }).then(function (result) {
-    //             res.json(result);
-    //         })
+
+    // Route for getting some data about our user to be used client side
+    // app.get("/api/user_data", function (req, res) {
+    //     if (!req.User) {
+    //         // The user is not logged in, send back an empty object
+    //         res.json({});
+    //     }
+    //     else {
+    //         // Send back the user's email and id
+    //         res.json({
+    //             email: req.user.email,
+    //             id: req.user.id
+    //         });
+    //     }
+    // });
 
 
     //     })
@@ -238,11 +258,11 @@ module.exports = function (app) {
     // });
 
     // app.post("/api/decks", function (req, res) {
-        // add userId  (this is comming if using passprot req.user)y
-        // console.log(req.user)
-        // console.log(req.body)
-        // let newDeck = req.body
-        // newDeck.UserId = req.user.id
+    // add userId  (this is comming if using passprot req.user)y
+    // console.log(req.user)
+    // console.log(req.body)
+    // let newDeck = req.body
+    // newDeck.UserId = req.user.id
     //     db.Deck.create(newDeck).then(function (dbDeck) {
     //         res.json(dbDeck);
     //     });
