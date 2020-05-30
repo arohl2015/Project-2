@@ -11,19 +11,23 @@ module.exports = function (app) {
         const dbUser = db.User.findOne({ where: { email } }).catch(err => {
             res.status(500).json({ err, message: "Something unexpected happened" });
         });
-
+        console.log("***************");
+        console.log(dbUser);
         dbUser.then(user => {
             if (!user) {
-                res.status(401).json({
+                console.log("I'm in the user condition");
+                res.json({
                     message: "User not found."
                 });
             } else if (!user.validPassword(password, user.get('password'))) {
+                console.log("I'm in this condition");
                 console.log(user.get('password'));
                 console.log(user.validPassword(password, user.get('password')));
                 res.status.json({
                     message: "Incorrect password."
                 });
             } else {
+                console.log("I'm in the else condition");
                 const token = passport.genToken(user.toJSON());
                 res.json(token);
             }

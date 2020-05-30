@@ -6,18 +6,19 @@
 // =============================================================
 var express = require("express");
 var session = require("express-session");
-var body = require("body-parser");
-
+// var body = require("body-parser");
+var app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 // Requiring passport
 var passport = require("./config/passport");
 // this is the port we are setting up
 var PORT = process.env.PORT || 8080;
 var db = require("./models");
 var passportConfig = require("./config/passport")
-var app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
+
+
 //Next, we initialize passport and the express session and passport session and add them both as middleware. We do this by adding these lines
 //app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 // app.use(passport.initialize());
