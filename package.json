@@ -4,7 +4,7 @@
   "description": "_Assimilate is a full-stack application that utilizes MYSQL, Sequelize, Node, Express, and Passport.",
   "main": "server.js",
   "dependencies": {
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.7.2",
     "dotenv": "^8.2.0",
